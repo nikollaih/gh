@@ -2,6 +2,7 @@
     cursor: pointer;
 }
 
-.profile-wid-bg{
-    height: 170px;
+.profile-wrapper {
+    background: #ff7f5d;
+    border-radius: 5px;
 }

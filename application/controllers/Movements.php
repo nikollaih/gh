@@ -11,6 +11,7 @@ class Movements extends CI_Controller {
 
 	// Create a new movement
 	public function create(){
+		is_logged(false, false); 
 		$postData = $this->input->post();
 		$resultSave = $this->saveMovementData($postData);
 		header("Location:".base_url()."Users/movements/".$postData["id_user"]);
@@ -46,6 +47,10 @@ class Movements extends CI_Controller {
 
 	// Get the movement information
 	public function getMovement($idMovement){
+		if (!is_logged(true, false)){
+			json_response(null, true, "Error de autenticación");
+		}
+
 		$existsMovement = $this->MovementsModel->find($idMovement);
 
 		if($existsMovement) 
@@ -56,6 +61,10 @@ class Movements extends CI_Controller {
 
 	// Delete the movement information
 	public function delete($idMovement){
+		if (!is_logged(true, false)){
+			json_response(null, true, "Error de autenticación");
+		}
+
 		$existsMovement = $this->MovementsModel->find($idMovement);
 		if($existsMovement) {
 			$client =  $this->UsersModel->find($existsMovement["id_user"]);

@@ -26,7 +26,7 @@ $dotenv->safeLoad();
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = ($_ENV['ENVIRONMENT'] == "prod") ? "https://".$_SERVER['HTTP_HOST'] : "http://".$_SERVER['HTTP_HOST']."/almacen";
+$config['base_url'] = ($_ENV['ENVIRONMENT'] == "prod") ? "https://".$_SERVER['HTTP_HOST'] : "http://".$_SERVER['HTTP_HOST']."/gh";
 
 /*
 |--------------------------------------------------------------------------

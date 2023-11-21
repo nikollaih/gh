@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="text-center mt-2">
                                     <h5 class="text-dark">Bienvenido!</h5>
-                                    <p class="text-muted">Iniciar sesión en GH.</p>
+                                    <p class="text-muted">Iniciar sesión en GH</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form action="<?= base_url() ?>Users/login" method="post">
@@ -50,12 +50,22 @@
                                                 <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             </div>
                                         </div>
+                                        <?php
+                                            if($this->session->flashdata('login')) { ?>
+                                                <div class="mt-4 alert alert-danger alert-dismissible bg-danger text-white alert-label-icon fade show mb-xl-0" role="alert">
+                                                    <i class="ri-error-warning-line label-icon"></i><strong>Error</strong>
+                                                    <?= $this->session->flashdata('login') ?>
+                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                                                </div>
+                                            <?php }
+                                        ?>
 
                                         <div class="mt-4">
                                             <button class="btn btn-secondary w-100" type="submit">Ingresar</button>
                                         </div>
                                     </form>
                                 </div>
+                                
                             </div>
                             <!-- end card body -->
                         </div>

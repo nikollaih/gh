@@ -8,6 +8,7 @@ class UsersModel extends CI_Model {
 
 	// Search for the user by username and password to validate the login
   	public function login($username, $password){
+		$this->db->select("u.id_user, u.id_user_type, u.fullname, u.profile_image");
     	$this->db->from("users u");
 		$this->db->where("u.username", $username);
 		$this->db->where("u.password", md5($password));

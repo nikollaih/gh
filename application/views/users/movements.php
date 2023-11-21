@@ -38,33 +38,37 @@
                     </div>
                     <!-- end page title -->
 
-                    <div class="profile-foreground position-relative mx-n4 mt-n4">
-                        <div class="profile-wid-bg">
-                            <img src="<?= base_url() ?>assets/images/profile-bg.jpg" alt="" class="profile-wid-img">
-                        </div>
-                    </div>
-
                     <div class="pt-4 mb-4 mb-lg-3 pb-lg-4 profile-wrapper">
-                        <div class="row g-4">
-                            <div class="col-auto">
-                                <div class="avatar-lg">
-                                    <img src="<?= base_url() ?>assets/images/users/avatar-1.jpg" alt="user-img" class="img-thumbnail rounded-circle">
+                        <div class="row text-sm-center text-md-left">
+                            <div class="col-xs-12 col-md-2">
+                                <div class="avatar-lg mx-auto">
+                                <?php
+                                    $url = base_url().'uploads/users/profile/'.$client["profile_image"];
+                                    
+                                    // Check if the URL is valid
+                                    $headers = get_headers($url);
+                                    if ($headers && strpos($headers[0], '200')) { ?>
+                                            <img src="<?= $url ?>" alt="user-img" class="img-thumbnail rounded-circle">
+                                        <?php } else { ?>
+                                            <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase"><h1 class="m-0 text-primary"><?= getInitials($client["fullname"]) ?></h1></div>
+                                        <?php }
+                                    ?>  
                                 </div>
                             </div>
                             <!--end col-->
-                            <div class="col">
+                            <div class="col-xs-12 col-md-8">
                                 <div class="p-2">
                                     <h3 class="text-white mb-1"><?= $client["fullname"] ?></h3>
-                                    <p class="text-white text-opacity-75"><?= $client["notes"] ?></p>
-                                    <div class="hstack text-white-50 gap-1">
-                                        <div>
-                                            <i class="ri-phone-line me-1 text-white text-opacity-75 fs-16 align-middle"></i><?= $client["phone_number"] ?>
-                                        </div>
+                                    <p class="text-white"><?= $client["notes"] ?></p>
+                                    <div class="text-white">
+                                        <p>
+                                            <i class="ri-phone-line me-1 text-white fs-16 align-middle"></i><?= $client["phone_number"] ?>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-auto order-last order-lg-0">
-                                <div class="row text text-white-50 text-center">
+                            <div class="col-xs-12 col-md-2">
+                                <div class="row text text-white text-center">
                                     <div class="col-lg-12 col-12">
                                         <div class="p-2">
                                             <h4 class="text-white mb-1">$<?= number_format($client["balance"], 0, ',', '.') ?></h4>

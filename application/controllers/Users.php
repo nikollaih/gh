@@ -6,22 +6,44 @@ class Users extends CI_Controller {
 	function __construct()
     {
         parent::__construct();
-         $this->load->model(['UsersModel', 'MovementsModel']);
+        $this->load->model(['UsersModel', 'MovementsModel']);
+		$this->load->library(['session']);
     }
 
+	// Do login
 	public function login(){
 		is_logged(true, false);
+		$data = $this->input->post();
+
+		if($data){
+			$successLogin = $this->UsersModel->login($data["username"], $data["password"]);
+			if($successLogin){
+				$this->session->set_userdata('userdata', $successLogin);
+				header("Location:". base_url() . "Users");
+			}
+			else $this->session->set_flashdata('login', 'Usuario o contraseña no valido');
+		}
+
 		$this->load->view('users/login');
+	}
+
+	// Do logout
+	function logout(){
+		$this->session->sess_destroy();
+		header("Location:". base_url() . "Users/login");
 	}
 
 	// Load the view with all the clients listing
 	public function index(){
+		is_logged(false, false);
+
 		$params["clients"] = $this->UsersModel->getByType("client");
 		$this->load->view('users/index', $params);
 	}
 
 	// Create a new client
 	public function create(){
+		is_logged(false, false);
 		$postData = $this->input->post();
 		$resultSave = $this->saveClientData($postData, $_FILES);
 		if($resultSave){
@@ -31,6 +53,8 @@ class Users extends CI_Controller {
 
 	// Show all te user movements
 	public function movements($idUser){
+		is_logged(false, false);
+
 		$params["client"] = $this->UsersModel->find($idUser);
 		$params["movements"] = $this->MovementsModel->getByUserType($idUser, "all");
 
@@ -68,6 +92,10 @@ class Users extends CI_Controller {
 
 	// Get the user information
 	public function getUser($idUser){
+		if (!is_logged(true, false)){
+			json_response(null, true, "Error de autenticación");
+		}
+
 		$existsClient = $this->UsersModel->find($idUser);
 
 		if($existsClient) 
@@ -78,6 +106,10 @@ class Users extends CI_Controller {
 
 	// Delete the user information
 	public function delete($idUser){
+		if (!is_logged(true, false)){
+			json_response(null, true, "Error de autenticación");
+		}
+
 		$existsClient = $this->UsersModel->find($idUser);
 		if($existsClient) {
 			$deleted = $this->UsersModel->update(array("id_user" => $idUser, "is_active" => 0));

@@ -35,6 +35,7 @@ class MovementsModel extends CI_Model {
 		if($type != "all")
         	$this->db->where("m.type", $type);
 		$this->db->order_by("m.date", "desc");
+		$this->db->order_by("m.id_movement", "desc");
 		$result = $this->db->get();
 		return ($result->num_rows() > 0) ? $result->result_array() : [];
 	}
