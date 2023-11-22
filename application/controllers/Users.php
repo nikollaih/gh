@@ -29,13 +29,14 @@ class Users extends CI_Controller {
 
 	// Do logout
 	function logout(){
+		$this->session->unset_userdata('userdata');
 		$this->session->sess_destroy();
 		header("Location:". base_url() . "Users/login");
 	}
 
 	// Load the view with all the clients listing
 	public function index(){
-		is_logged(false, false);
+		is_logged(false, true);
 
 		$params["clients"] = $this->UsersModel->getByType("client");
 		$this->load->view('users/index', $params);
@@ -43,17 +44,17 @@ class Users extends CI_Controller {
 
 	// Create a new client
 	public function create(){
-		is_logged(false, false);
+		is_logged(false, true);
 		$postData = $this->input->post();
 		$resultSave = $this->saveClientData($postData, $_FILES);
 		if($resultSave){
-			header("Location:".base_url().$_SERVER["PATH_INFO"]);
+			header("Location:".base_url()."Users");
 		}
 	}
 
 	// Show all te user movements
 	public function movements($idUser){
-		is_logged(false, false);
+		is_logged(false, true);
 
 		$params["client"] = $this->UsersModel->find($idUser);
 		$params["movements"] = $this->MovementsModel->getByUserType($idUser, "all");

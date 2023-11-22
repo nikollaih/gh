@@ -11,7 +11,7 @@ class Movements extends CI_Controller {
 
 	// Create a new movement
 	public function create(){
-		is_logged(false, false); 
+		is_logged(false, true); 
 		$postData = $this->input->post();
 		$resultSave = $this->saveMovementData($postData);
 		header("Location:".base_url()."Users/movements/".$postData["id_user"]);

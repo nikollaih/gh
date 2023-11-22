@@ -14,9 +14,8 @@
         function is_logged($return = false, $redirect = true){
             $CI = &get_instance();
             $CI->load->library('session');
-            if ($CI->session->userdata('userdata')){
+            if ($CI->session->userdata('userdata') && isset($CI->session->userdata('userdata')["fullname"])){
                 if($return)return true;
-                else if ($redirect) header("Location:".base_url());
             }
             else{
                 if($return) return false;

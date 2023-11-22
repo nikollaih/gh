@@ -6,3 +6,8 @@
     background: #ff7f5d;
     border-radius: 5px;
 }
+
+#member-img, .member-img.rounded-circle {
+    width: 86px !important;
+    height: 86px !important;
+}
