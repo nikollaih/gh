@@ -48,7 +48,7 @@
                                     // Check if the URL is valid
                                     $headers = get_headers($url);
                                     if ($headers && strpos($headers[0], '200')) { ?>
-                                            <img src="<?= $url ?>" alt="user-img" class="img-thumbnail rounded-circle">
+                                            <img src="<?= $url ?>" alt="user-img" class="img-thumbnail rounded-circle" style="height: 100px;width: 100px;">
                                         <?php } else { ?>
                                             <div class="avatar-title border bg-light text-primary rounded-circle text-uppercase"><h1 class="m-0 text-primary"><?= getInitials($client["fullname"]) ?></h1></div>
                                         <?php }
@@ -58,10 +58,10 @@
                             <!--end col-->
                             <div class="col-xs-12 col-md-8">
                                 <div class="p-2">
-                                    <h3 class="text-white mb-1"><?= $client["fullname"] ?></h3>
-                                    <p class="text-white"><?= $client["notes"] ?></p>
+                                    <h3 class="text-white mb-1 text-center"><?= $client["fullname"] ?></h3>
+                                    <p class="text-white text-center"><?= $client["notes"] ?></p>
                                     <div class="text-white">
-                                        <p>
+                                        <p class="text-center">
                                             <i class="ri-phone-line me-1 text-white fs-16 align-middle"></i><?= $client["phone_number"] ?>
                                         </p>
                                     </div>
