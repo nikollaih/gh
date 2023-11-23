@@ -42,8 +42,20 @@ class UsersModel extends CI_Model {
 	public function getByType($type){
 		$this->db->from("users u");
 		$this->db->join("user_types ut", "u.id_user_type = ut.id_user_types");
-		$this->db->where("user_type", $type);
+		$this->db->where("ut.user_type", $type);
 		$this->db->where("u.is_active", 1);
+		$this->db->order_by("u.fullname", "asc");
+		$result = $this->db->get();
+		return ($result->num_rows() > 0) ? $result->result_array() : [];
+	}
+
+	// Get the users listing by balance
+	public function getByBalance($type){
+		$this->db->from("users u");
+		$this->db->join("user_types ut", "u.id_user_type = ut.id_user_types");
+		$this->db->where("ut.user_type", $type);
+		$this->db->where("u.is_active", 1);
+		$this->db->where("u.balance <", 0);
 		$this->db->order_by("u.fullname", "asc");
 		$result = $this->db->get();
 		return ($result->num_rows() > 0) ? $result->result_array() : [];

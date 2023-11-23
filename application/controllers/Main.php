@@ -15,6 +15,7 @@ class Main extends CI_Controller {
 		$debt = $this->UsersModel->getTotalDebt();
 		$params["debt"] = ($debt["debt"]) ? $debt["debt"] : 0;
 		$params["slow_payer"] = $this->UsersModel->getSlowPayer();
+		$params["clients"] = $this->UsersModel->getByBalance("client");
 
 		$this->load->view('dashboard/index', $params);
 	}
