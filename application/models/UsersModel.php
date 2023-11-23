@@ -65,8 +65,6 @@ class UsersModel extends CI_Model {
 	public function getSlowPayer(){
 		$oneMonthAgo = date('Y-m-d', strtotime('-1 month'));
 		$result = $this->db->query("SELECT u.*, m.* FROM users u JOIN movements m ON u.id_user = m.id_user GROUP BY u.id_user HAVING MAX(m.date) < DATE_SUB(NOW(), INTERVAL 1 MONTH)");
-		
-		echo $this->db->last_query();
 		return ($result->num_rows() > 0) ? $result->result_array() : [];
 	}
 }
