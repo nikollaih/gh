@@ -48,4 +48,25 @@ class UsersModel extends CI_Model {
 		$result = $this->db->get();
 		return ($result->num_rows() > 0) ? $result->result_array() : [];
 	}
+
+	// Get the total debt among the clients
+	public function getTotalDebt($type = 2){
+		$this->db->select("SUM(u.balance) as debt");
+		$this->db->from("users u");
+		$this->db->join("user_types ut", "u.id_user_type = ut.id_user_types");
+		$this->db->where("u.id_user_type", $type);
+		$this->db->where("u.is_active", 1);
+		$this->db->where("u.balance <", 0);
+		$result = $this->db->get();
+		return ($result->num_rows() > 0) ? $result->row_array() : [];
+	}
+
+	// Get the users listing by user type
+	public function getSlowPayer(){
+		$oneMonthAgo = date('Y-m-d', strtotime('-1 month'));
+		$result = $this->db->query("SELECT u.*, m.* FROM users u JOIN movements m ON u.id_user = m.id_user GROUP BY u.id_user HAVING MAX(m.date) < DATE_SUB(NOW(), INTERVAL 1 MONTH)");
+		
+		echo $this->db->last_query();
+		return ($result->num_rows() > 0) ? $result->result_array() : [];
+	}
 }
