@@ -7,7 +7,12 @@
     border-radius: 5px;
 }
 
-#member-img, .member-img.rounded-circle {
+#member-img, .grid-view-filter .member-img.rounded-circle {
     width: 86px !important;
     height: 86px !important; 
+}
+
+.list-view-filter .member-img.rounded-circle {
+    width: 54px !important;
+    height: 54px !important; 
 }

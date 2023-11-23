@@ -60,4 +60,6 @@
 <!-- Modal -->
 <?php $this->load->view("templates/modal/addClient") ?>
 <?php $this->load->view("templates/modal/addMovement") ?>
+<?php $this->load->view("templates/modal/addExpense") ?>
+<?php $this->load->view("templates/modal/addIncome") ?>
 <!--end modal-->

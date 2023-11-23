@@ -42,6 +42,12 @@
 <!-- Movements -->
 <script src="<?= base_url() ?>assets/js/movements.js"></script>
 
+<!-- Expenses -->
+<script src="<?= base_url() ?>assets/js/expenses.js"></script>
+
+<!-- Expenses -->
+<script src="<?= base_url() ?>assets/js/incomes.js"></script>
+
 <!-- App js -->
 <script src="<?= base_url() ?>assets/js/app.js"></script>
 
