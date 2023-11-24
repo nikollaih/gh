@@ -40,6 +40,15 @@ class MovementsModel extends CI_Model {
 		return ($result->num_rows() > 0) ? $result->result_array() : [];
 	}
 
+	// Get movements by date type
+	public function getMovementsAmountByDate($startDate, $endDate){
+		$this->db->select("SUM(m.price) as amount");
+		$this->db->from("movements m");
+		$this->db->where("m.type", 1);
+		$result = $this->db->get();
+		return ($result->num_rows() > 0) ? $result->row_array() : [];
+	}
+
 	// Delete a movement
 	public function delete($idMovement){
 		$this->db->where("id_movement", $idMovement);
