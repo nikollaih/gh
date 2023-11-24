@@ -21,6 +21,8 @@ class Main extends CI_Controller {
 		$incomesAmount = $this->IncomesModel->getAllAmount();
 
 		$params["balance"] = floatval($incomesAmount["amount"]) - floatval($expensesAmount["amount"]);
+		$params["expenses"] = floatval($expensesAmount["amount"]);
+		$params["incomes"] = floatval($incomesAmount["amount"]);
 
 		$this->load->view('dashboard/index', $params);
 	}

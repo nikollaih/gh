@@ -44,9 +44,11 @@
                                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Balance del mes</p>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                <div class="d-flex align-items-end justify-content-between mt-2">
                                                     <div>
-                                                        <h4 class="fs-20 fw-semibold ff-secondary mb-4"><span class="" data-target="">$<?= number_format(abs(floatval($balance)), 0, ',', '.'); ?></span></h4>
+                                                        <p class="mb-0 text-success text-rigth fs-6" style="text-align:right;">$<?= number_format(abs(floatval($incomes)), 0, ',', '.'); ?></p>
+                                                        <p class="mb-0 text-danger" style="text-align:right;">$<?= number_format(abs(floatval($expenses)), 0, ',', '.'); ?></p>
+                                                        <h4 class="fs-20 fw-semibold ff-secondary mb-0"><span class="" data-target="">$<?= number_format(abs(floatval($balance)), 0, ',', '.'); ?></span></h4>
                                                     </div>
                                                     <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-<?= ($balance >= 0) ? "success" : "danger" ?>-subtle rounded fs-3">
