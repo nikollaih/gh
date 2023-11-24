@@ -45,15 +45,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-end justify-content-between mt-2">
-                                                    <div>
-                                                        <p class="mb-0 text-success text-rigth fs-6" style="text-align:right;">$<?= number_format(abs(floatval($incomes)), 0, ',', '.'); ?></p>
-                                                        <p class="mb-0 text-danger" style="text-align:right;">$<?= number_format(abs(floatval($expenses)), 0, ',', '.'); ?></p>
-                                                        <h4 class="fs-20 fw-semibold ff-secondary mb-0"><span class="" data-target="">$<?= number_format(abs(floatval($balance)), 0, ',', '.'); ?></span></h4>
-                                                    </div>
+                                                    
                                                     <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-<?= ($balance >= 0) ? "success" : "danger" ?>-subtle rounded fs-3">
                                                             <i class="mdi mdi-cash-register text-<?= ($balance >= 0) ? "success" : "danger" ?>"></i>
                                                         </span>
+                                                    </div>
+                                                    <div>
+                                                        <p class="mb-0 text-success text-rigth fs-6" style="text-align:right;">$<?= number_format(abs(floatval($incomes)), 0, ',', '.'); ?></p>
+                                                        <p class="mb-0 text-danger" style="text-align:right;">$<?= number_format(abs(floatval($expenses)), 0, ',', '.'); ?></p>
+                                                        <h4 class="fs-20 fw-semibold ff-secondary mb-0"><span class="" data-target="">$<?= number_format(abs(floatval($balance)), 0, ',', '.'); ?></span></h4>
                                                     </div>
                                                 </div>
                                             </div><!-- end card body -->
