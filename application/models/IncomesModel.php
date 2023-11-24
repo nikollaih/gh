@@ -38,6 +38,14 @@ class IncomesModel extends CI_Model {
 		return ($result->num_rows() > 0) ? $result->result_array() : [];
 	}
 
+	// Get the incomes amount
+	public function getAllAmount(){
+		$this->db->select("SUM(e.price) as amount");
+		$this->db->from("incomes e");
+		$result = $this->db->get();
+		return ($result->num_rows() > 0) ? $result->row_array() : [];
+	}
+
 	// Delete a income
 	public function delete($idMovement){
 		$this->db->where("id_income", $idMovement);

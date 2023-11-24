@@ -41,6 +41,28 @@
                                             <div class="card-body">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-grow-1 overflow-hidden">
+                                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Balance del mes</p>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                                    <div>
+                                                        <h4 class="fs-20 fw-semibold ff-secondary mb-4"><span class="" data-target="">$<?= number_format(abs(floatval($balance)), 0, ',', '.'); ?></span></h4>
+                                                    </div>
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <span class="avatar-title bg-<?= ($balance >= 0) ? "success" : "danger" ?>-subtle rounded fs-3">
+                                                            <i class="mdi mdi-cash-register text-<?= ($balance >= 0) ? "success" : "danger" ?>"></i>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><!-- end card body -->
+                                        </div><!-- end card -->
+                                    </div><!-- end col -->
+                                    <div class="col-xl-3 col-md-6">
+                                        <!-- card -->
+                                        <div class="card card-animate">
+                                            <div class="card-body">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-grow-1 overflow-hidden">
                                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> morosos</p>
                                                     </div>
                                                 </div>
@@ -105,6 +127,20 @@
                             </div> <!-- end .h-100-->
                         </div> <!-- end col -->
                     </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title mb-0">Balance del mes</h4>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="myLineChart" class="chartjs-chart" data-colors='["--vz-primary-rgb, 0.2", "--vz-primary", "--vz-success-rgb, 0.2", "--vz-success"]'></canvas>
+                                </div>
+                                <div class="card-body">
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
                 </div>
                 <!-- container-fluid -->
             </div>
@@ -128,3 +164,105 @@
     </div>
 </body>
 </html>
+
+<!-- Chart JS -->
+<script src="<?= base_url() ?>assets/libs/chart.js/chart.umd.js"></script>
+
+<!-- chartjs init -->
+<script src="<?= base_url() ?>assets/js/pages/chartjs.init.js"></script>
+
+<script>
+    $(document).ready(function(){
+        let arrayOfNumbers = [];
+
+        for (let i = 1; i <= 31; i++) {
+            arrayOfNumbers.push(i.toString());
+        }
+        // Sample data for the line chart
+        let data = {
+            labels: arrayOfNumbers,
+            datasets: [
+                {
+                    label: "Gastos",
+                    fill: !0,
+                    lineTension: 0.5,
+                    backgroundColor: 'rgba(210, 87, 94, 0.1)',
+                    borderColor: 'rgb(210, 87, 94)',
+                    borderCapStyle: "butt",
+                    borderDash: [],
+                    borderDashOffset: 0,
+                    borderJoinStyle: "miter",
+                    pointBorderColor: 'rgb(210, 87, 94)',
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 10,
+                    pointHoverBackgroundColor: 'rgb(210, 87, 94)',
+                    pointHoverBorderColor: "#fff",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 3,
+                    pointHitRadius: 10,
+                    data: [65, 59, 80, 81, 56, 55, 40, 55, 30, 80],
+                },
+                {
+                    label: "Ingresos",
+                    fill: !0,
+                    lineTension: 0.5,
+                    backgroundColor: 'rgb(60, 209, 136, 0.1)',
+                    borderColor: 'rgba(60, 209, 136)',
+                    borderCapStyle: "butt",
+                    borderDash: [],
+                    borderDashOffset: 0,
+                    borderJoinStyle: "miter",
+                    pointBorderColor: 'rgb(60, 209, 136)',
+                    pointBackgroundColor: "#fff",
+                    pointBorderWidth: 2,
+                    pointHoverRadius: 10,
+                    pointHoverBackgroundColor: 'rgb(60, 209, 136)',
+                    pointHoverBorderColor: "#eef0f2",
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 3,
+                    pointHitRadius: 10,
+                    data: [80, 23, 56, 65, 23, 35, 85, 25, 92, 36],
+                },
+            ],
+        }
+
+        let options = {
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            family: "Poppins"
+                        }
+                    }
+                }
+            }
+        };
+
+        // Get the canvas element
+        var ctx = document.getElementById('myLineChart').getContext('2d');
+
+        // Create the line chart
+        var myLineChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    });
+</script>

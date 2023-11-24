@@ -6,7 +6,7 @@ class Main extends CI_Controller {
 	function __construct()
     {
         parent::__construct();
-         $this->load->model(['UsersModel']);
+         $this->load->model(['UsersModel', 'ExpensesModel', 'IncomesModel']);
     }
 
 	public function dashboard(){
@@ -16,6 +16,11 @@ class Main extends CI_Controller {
 		$params["debt"] = ($debt["debt"]) ? $debt["debt"] : 0;
 		$params["slow_payer"] = $this->UsersModel->getSlowPayer();
 		$params["clients"] = $this->UsersModel->getByBalance("client");
+
+		$expensesAmount = $this->ExpensesModel->getAllAmount();
+		$incomesAmount = $this->IncomesModel->getAllAmount();
+
+		$params["balance"] = floatval($incomesAmount["amount"]) - floatval($expensesAmount["amount"]);
 
 		$this->load->view('dashboard/index', $params);
 	}

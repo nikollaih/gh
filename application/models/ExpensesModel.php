@@ -38,6 +38,14 @@ class ExpensesModel extends CI_Model {
 		return ($result->num_rows() > 0) ? $result->result_array() : [];
 	}
 
+	// Get the expenses amount
+	public function getAllAmount(){
+		$this->db->select("SUM(e.price) as amount");
+		$this->db->from("expenses e");
+		$result = $this->db->get();
+		return ($result->num_rows() > 0) ? $result->row_array() : [];
+	}
+
 	// Delete a expense
 	public function delete($idMovement){
 		$this->db->where("id_expense", $idMovement);
